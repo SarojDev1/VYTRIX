@@ -1,0 +1,2609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>VYTRIX — Gaming Phone Coolers</title>
+
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+
+:root{
+  --bg:#07070a;
+  --card:#111118;
+  --text:#f5f5f7;
+  --muted:#9999a6;
+  --purple:#8b5cf6;
+  --purple2:#c084fc;
+  --border:#292933;
+  --danger:#ff5577;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:Inter,Arial,sans-serif;
+  overflow-x:hidden;
+}
+
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
+button{
+  font-family:inherit;
+  cursor:pointer;
+  color:inherit;
+}
+
+/* ================= HEADER ================= */
+
+header{
+  height:76px;
+  padding:0 6%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:rgba(7,7,10,.94);
+  backdrop-filter:blur(15px);
+  border-bottom:1px solid var(--border);
+}
+
+.logo{
+  font-family:Orbitron,sans-serif;
+  font-weight:800;
+  font-size:25px;
+  letter-spacing:2px;
+}
+
+.logo span{
+  color:var(--purple2);
+}
+
+nav{
+  display:flex;
+  gap:30px;
+}
+
+nav a{
+  color:#bdbdc8;
+  font-size:14px;
+  transition:.2s;
+}
+
+nav a:hover{
+  color:white;
+}
+
+.cart-btn{
+  background:#17171f;
+  border:1px solid var(--border);
+  padding:10px 14px;
+  border-radius:9px;
+}
+
+.cart-count{
+  background:var(--purple);
+  padding:3px 7px;
+  border-radius:20px;
+  font-size:11px;
+}
+
+.menu{
+  display:none;
+  border:0;
+  background:none;
+  font-size:25px;
+}
+
+/* ================= HEADER SLIDER ================= */
+
+.header-slider{
+  width:100%;
+  position:relative;
+  background:#08080c;
+  border-bottom:1px solid var(--border);
+  overflow:hidden;
+}
+
+.slider-window{
+  width:100%;
+  overflow:hidden;
+}
+
+.slider-track{
+  display:flex;
+  width:100%;
+  transition:transform .5s ease;
+}
+
+.slide{
+  min-width:100%;
+  width:100%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:#08080c;
+  position:relative;
+}
+
+.slide img{
+  width:100%;
+  height:auto;
+  max-height:520px;
+  display:block;
+  object-fit:contain;
+  object-position:center;
+}
+
+/* MANUAL ARROWS */
+
+.slider-arrow{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  border:1px solid rgba(255,255,255,.2);
+  background:rgba(0,0,0,.65);
+  backdrop-filter:blur(8px);
+  font-size:22px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:5;
+  transition:.2s;
+}
+
+.slider-arrow:hover{
+  background:var(--purple);
+  border-color:var(--purple);
+}
+
+.slider-prev{
+  left:20px;
+}
+
+.slider-next{
+  right:20px;
+}
+
+/* SLIDER DOTS */
+
+.slider-dots{
+  position:absolute;
+  bottom:15px;
+  left:50%;
+  transform:translateX(-50%);
+  display:flex;
+  gap:8px;
+  z-index:5;
+}
+
+.slider-dot{
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  border:0;
+  background:#777783;
+  padding:0;
+  transition:.2s;
+}
+
+.slider-dot.active{
+  width:25px;
+  border-radius:10px;
+  background:var(--purple2);
+}
+
+/* ================= HERO ================= */
+
+.hero{
+  min-height:680px;
+  padding:100px 8%;
+  display:flex;
+  align-items:center;
+  position:relative;
+  overflow:hidden;
+}
+
+.hero-content{
+  max-width:700px;
+  position:relative;
+  z-index:2;
+}
+
+.eyebrow{
+  color:var(--purple2);
+  font-family:Orbitron,sans-serif;
+  font-size:11px;
+  letter-spacing:3px;
+  font-weight:bold;
+  margin-bottom:18px;
+}
+
+.hero h1{
+  font-family:Orbitron,sans-serif;
+  font-size:clamp(55px,8vw,115px);
+  line-height:.95;
+  letter-spacing:-5px;
+}
+
+.hero h1 span{
+  color:var(--purple2);
+}
+
+.hero p{
+  color:var(--muted);
+  max-width:550px;
+  margin:28px 0;
+  font-size:17px;
+  line-height:1.7;
+}
+
+.btn{
+  display:inline-flex;
+  align-items:center;
+  gap:15px;
+  padding:15px 22px;
+  border-radius:8px;
+  font-weight:800;
+  font-size:13px;
+  border:0;
+}
+
+.primary{
+  background:var(--purple);
+  box-shadow:0 0 35px rgba(139,92,246,.25);
+  transition:.25s;
+}
+
+.primary:hover{
+  transform:translateY(-3px);
+  box-shadow:0 0 45px rgba(139,92,246,.5);
+}
+
+.hero-glow{
+  position:absolute;
+  right:-100px;
+  top:70px;
+  width:600px;
+  height:600px;
+  border-radius:50%;
+  background:radial-gradient(
+    circle,
+    rgba(139,92,246,.3),
+    rgba(139,92,246,.05) 45%,
+    transparent 70%
+  );
+}
+
+.grid-bg{
+  position:absolute;
+  right:0;
+  bottom:-200px;
+  width:70%;
+  height:500px;
+  opacity:.35;
+  background-image:
+    linear-gradient(rgba(192,132,252,.1) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(192,132,252,.1) 1px,transparent 1px);
+  background-size:50px 50px;
+  transform:perspective(400px) rotateX(60deg);
+}
+
+/* ================= TICKER ================= */
+
+.ticker{
+  padding:15px 0;
+  overflow:hidden;
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  white-space:nowrap;
+  font-family:Orbitron,sans-serif;
+  font-size:11px;
+  letter-spacing:3px;
+  color:#777783;
+}
+
+.ticker div{
+  animation:scroll 20s linear infinite;
+}
+
+@keyframes scroll{
+  from{
+    transform:translateX(0);
+  }
+
+  to{
+    transform:translateX(-40%);
+  }
+}
+
+/* ================= SECTIONS ================= */
+
+section{
+  padding:90px 7%;
+}
+
+.section-title{
+  margin-bottom:35px;
+}
+
+.section-title h2{
+  font-family:Orbitron,sans-serif;
+  font-size:clamp(32px,5vw,55px);
+}
+
+.section-title h2 span{
+  color:var(--purple2);
+}
+
+/* ================= CATEGORY ================= */
+
+.categories{
+  display:grid;
+  grid-template-columns:1fr;
+  max-width:350px;
+}
+
+.category{
+  background:linear-gradient(145deg,#13131b,#0c0c11);
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:30px;
+  min-height:190px;
+  text-align:left;
+  transition:.25s;
+}
+
+.category:hover{
+  transform:translateY(-6px);
+  border-color:var(--purple);
+}
+
+.category-icon{
+  font-size:35px;
+  display:block;
+  margin-bottom:30px;
+}
+
+.category strong{
+  display:block;
+  font-family:Orbitron,sans-serif;
+  font-size:15px;
+}
+
+.category small{
+  display:block;
+  color:var(--muted);
+  margin-top:8px;
+}
+
+/* ================= SHOP ================= */
+
+.shop-head{
+  display:flex;
+  align-items:end;
+  justify-content:space-between;
+  gap:30px;
+  margin-bottom:35px;
+}
+
+.filters{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+}
+
+.filter{
+  background:#111118;
+  border:1px solid var(--border);
+  padding:9px 13px;
+  border-radius:7px;
+  color:var(--muted);
+  font-size:12px;
+}
+
+.filter.active,
+.filter:hover{
+  background:var(--purple);
+  color:white;
+}
+
+/* ================= PRODUCTS ================= */
+
+.products{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:18px;
+}
+
+.product{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:14px;
+  overflow:hidden;
+  transition:.25s;
+  position:relative;
+}
+
+.product:hover{
+  transform:translateY(-6px);
+  border-color:#5d4295;
+}
+
+/* PRODUCT IMAGE */
+
+.product-image{
+  height:245px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:
+    radial-gradient(
+      circle,
+      #292036,
+      #0d0d12 70%
+    );
+  position:relative;
+  overflow:hidden;
+}
+
+.product-image img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  padding:20px;
+  transition:.3s;
+}
+
+.product:hover .product-image img{
+  transform:scale(1.06);
+}
+
+.image-fallback{
+  font-size:75px;
+}
+
+/* DISCOUNT */
+
+.discount-badge{
+  position:absolute;
+  top:14px;
+  left:14px;
+  z-index:5;
+  background:var(--danger);
+  color:white;
+  padding:6px 9px;
+  border-radius:6px;
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:.5px;
+}
+
+/* ================= PRODUCT INFO ================= */
+
+.product-info{
+  padding:19px;
+}
+
+.product-category{
+  color:var(--purple2);
+  font-size:10px;
+  font-weight:bold;
+  letter-spacing:1px;
+  text-transform:uppercase;
+}
+
+.product h3{
+  font-family:Orbitron,sans-serif;
+  font-size:14px;
+  margin:9px 0 12px;
+}
+
+/* ================= PRICE ================= */
+
+.price-box{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  flex-wrap:wrap;
+}
+
+.original-price{
+  color:#777783;
+  font-size:13px;
+  text-decoration:line-through;
+  text-decoration-thickness:2px;
+}
+
+.sale-price{
+  color:white;
+  font-size:18px;
+  font-weight:800;
+}
+
+.no-discount{
+  color:white;
+  font-size:17px;
+  font-weight:800;
+}
+
+/* ================= BUTTONS ================= */
+
+.product-buttons{
+  display:flex;
+  gap:8px;
+  margin-top:15px;
+}
+
+.add,
+.view{
+  flex:1;
+  padding:10px;
+  border-radius:7px;
+  font-size:11px;
+  font-weight:bold;
+}
+
+.add{
+  background:var(--purple);
+  border:0;
+}
+
+.view{
+  background:#191920;
+  border:1px solid var(--border);
+}
+
+.add:hover{
+  background:#9d72f8;
+}
+
+/* ================= PROMO ================= */
+
+.promo{
+  margin:0 7% 80px;
+  padding:65px 7%;
+  border:1px solid var(--border);
+  border-radius:18px;
+  background:
+    radial-gradient(
+      circle at 80% 50%,
+      rgba(139,92,246,.2),
+      transparent 40%
+    ),
+    #101016;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:50px;
+}
+
+.promo h2{
+  font-family:Orbitron,sans-serif;
+  font-size:45px;
+}
+
+.promo h2 span{
+  color:var(--purple2);
+}
+
+.promo p{
+  color:var(--muted);
+  max-width:600px;
+  margin-top:18px;
+  line-height:1.7;
+}
+
+.stats{
+  display:flex;
+  gap:30px;
+}
+
+.stats div{
+  border-left:1px solid var(--border);
+  padding-left:20px;
+}
+
+.stats strong{
+  display:block;
+  color:var(--purple2);
+  font-family:Orbitron,sans-serif;
+  font-size:22px;
+}
+
+.stats span{
+  color:var(--muted);
+  font-size:12px;
+}
+
+/* ================= ABOUT ================= */
+
+.about{
+  max-width:900px;
+}
+
+.about h2,
+.contact h2{
+  font-family:Orbitron,sans-serif;
+  font-size:45px;
+}
+
+.about h2 span,
+.contact h2 span{
+  color:var(--purple2);
+}
+
+.about-text{
+  color:var(--muted);
+  margin-top:22px;
+  max-width:700px;
+  line-height:1.8;
+}
+
+/* ================= CONTACT ================= */
+
+.contact{
+  border-top:1px solid var(--border);
+  display:flex;
+  justify-content:space-between;
+  align-items:end;
+  gap:30px;
+}
+
+.outline{
+  padding:14px 20px;
+  border:1px solid #555563;
+  border-radius:8px;
+  font-weight:bold;
+  font-size:12px;
+  transition:.2s;
+}
+
+.outline:hover{
+  border-color:var(--purple2);
+  color:var(--purple2);
+}
+
+/* ================= FOOTER ================= */
+
+footer{
+  padding:30px 7%;
+  border-top:1px solid var(--border);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  color:var(--muted);
+  font-size:12px;
+}
+
+.footer-logo{
+  font-family:Orbitron,sans-serif;
+  font-weight:bold;
+  color:white;
+  font-size:20px;
+}
+
+/* ================= CART ================= */
+
+.cart-panel{
+  position:fixed;
+  z-index:200;
+  right:-430px;
+  top:0;
+  height:100vh;
+  width:min(430px,100%);
+  background:#0d0d12;
+  border-left:1px solid var(--border);
+  padding:25px;
+  display:flex;
+  flex-direction:column;
+  transition:.3s;
+}
+
+.cart-panel.open{
+  right:0;
+}
+
+.cart-head{
+  display:flex;
+  justify-content:space-between;
+  padding-bottom:20px;
+  border-bottom:1px solid var(--border);
+}
+
+.cart-head h3{
+  font-family:Orbitron,sans-serif;
+}
+
+.close{
+  background:none;
+  border:0;
+  font-size:18px;
+}
+
+.cart-items{
+  flex:1;
+  overflow:auto;
+}
+
+.cart-item{
+  display:flex;
+  gap:12px;
+  padding:16px 0;
+  border-bottom:1px solid var(--border);
+}
+
+.cart-icon{
+  width:70px;
+  height:70px;
+  display:grid;
+  place-items:center;
+  background:#181820;
+  border-radius:8px;
+  overflow:hidden;
+  flex-shrink:0;
+}
+
+.cart-icon img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  padding:5px;
+}
+
+.cart-item h4{
+  font-size:13px;
+}
+
+.cart-item p{
+  color:var(--muted);
+  font-size:12px;
+  margin-top:5px;
+}
+
+.remove{
+  background:none;
+  border:0;
+  color:#ff7185;
+  font-size:11px;
+  margin-top:7px;
+}
+
+.cart-bottom{
+  border-top:1px solid var(--border);
+  padding-top:20px;
+}
+
+.total{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:18px;
+}
+
+.checkout{
+  width:100%;
+  justify-content:center;
+}
+
+.empty{
+  text-align:center;
+  color:var(--muted);
+  padding:60px 10px;
+}
+
+/* ================= OVERLAY ================= */
+
+.overlay{
+  position:fixed;
+  inset:0;
+  z-index:150;
+  background:rgba(0,0,0,.7);
+  display:none;
+}
+
+.overlay.show{
+  display:block;
+}
+
+/* ================= MODAL ================= */
+
+.modal{
+  position:fixed;
+  z-index:250;
+  left:50%;
+  top:50%;
+  width:min(760px,92%);
+  max-height:90vh;
+  overflow:auto;
+  transform:translate(-50%,-45%) scale(.95);
+  background:#111118;
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:30px;
+  opacity:0;
+  pointer-events:none;
+  transition:.25s;
+}
+
+.modal.show{
+  opacity:1;
+  pointer-events:auto;
+  transform:translate(-50%,-50%) scale(1);
+}
+
+.modal-close{
+  position:absolute;
+  right:20px;
+  top:18px;
+  background:none;
+  border:0;
+  font-size:18px;
+  z-index:5;
+}
+
+.modal-product{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:30px;
+}
+
+.modal-image{
+  min-height:330px;
+  border-radius:12px;
+  display:grid;
+  place-items:center;
+  background:radial-gradient(circle,#2c203d,#0b0b10);
+  overflow:hidden;
+}
+
+.modal-image img{
+  width:100%;
+  height:100%;
+  max-height:330px;
+  object-fit:contain;
+  padding:20px;
+}
+
+.modal-info{
+  padding-top:10px;
+}
+
+.modal-info h2{
+  font-family:Orbitron,sans-serif;
+  font-size:32px;
+  margin:10px 0;
+}
+
+.modal-info p{
+  color:var(--muted);
+  margin:20px 0;
+  line-height:1.7;
+}
+
+/* ================= TOAST ================= */
+
+.toast{
+  position:fixed;
+  left:50%;
+  bottom:30px;
+  transform:translate(-50%,100px);
+  background:#181820;
+  border:1px solid var(--border);
+  padding:13px 20px;
+  border-radius:9px;
+  z-index:500;
+  font-size:13px;
+  opacity:0;
+  transition:.3s;
+}
+
+.toast.show{
+  transform:translate(-50%,0);
+  opacity:1;
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:900px){
+
+  .products{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .promo{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+  .slide img{
+    width:72%;
+    max-height:260px;
+  }
+
+}
+
+@media(max-width:700px){
+
+  header{
+    padding:0 5%;
+  }
+
+  nav{
+    display:none;
+    position:absolute;
+    left:0;
+    right:0;
+    top:76px;
+    padding:25px;
+    background:#0b0b10;
+    border-bottom:1px solid var(--border);
+    flex-direction:column;
+  }
+
+  nav.open{
+    display:flex;
+  }
+
+  .menu{
+    display:inline-block;
+  }
+
+  /* MOBILE BANNER
+     FULL IMAGE - NO CROPPING */
+
+  .slide{
+    min-height:auto;
+  }
+
+  .slide img{
+    width:75%;
+    height:auto;
+    max-height:220px;
+    object-fit:contain;
+  }
+
+  .slider-arrow{
+    width:35px;
+    height:35px;
+    font-size:18px;
+  }
+
+  .slider-prev{
+    left:10px;
+  }
+
+  .slider-next{
+    right:10px;
+  }
+
+  .slider-dots{
+    bottom:8px;
+  }
+
+  .hero{
+    padding:75px 6%;
+    min-height:580px;
+  }
+
+  .hero h1{
+    font-size:55px;
+  }
+
+  section{
+    padding:70px 6%;
+  }
+
+  .shop-head{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+  .products{
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+  }
+
+  .product-image{
+    height:180px;
+  }
+
+  .product-image img{
+    padding:12px;
+  }
+
+  .promo{
+    margin:0 6% 60px;
+    padding:40px 25px;
+  }
+
+  .promo h2,
+  .about h2,
+  .contact h2{
+    font-size:35px;
+  }
+
+  .stats{
+    width:100%;
+    justify-content:space-between;
+  }
+
+  .contact{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+  footer{
+    flex-direction:column;
+    gap:15px;
+    text-align:center;
+  }
+
+  .modal-product{
+    grid-template-columns:1fr;
+  }
+
+  .modal-image{
+    min-height:220px;
+  }
+
+  .modal-image img{
+    max-height:220px;
+  }
+
+}
+
+@media(max-width:430px){
+
+  .products{
+    grid-template-columns:1fr;
+  }
+
+  .hero h1{
+    font-size:48px;
+  }
+
+}
+
+
+/* ================= LIVE CHAT ================= */
+.chat-launcher{
+  position:fixed;
+  right:22px;
+  bottom:22px;
+  width:58px;
+  height:58px;
+  border:0;
+  border-radius:50%;
+  background:var(--purple);
+  color:white;
+  font-size:25px;
+  box-shadow:0 8px 30px rgba(139,92,246,.4);
+  z-index:300;
+  transition:.2s;
+}
+.chat-launcher:hover{transform:translateY(-3px) scale(1.04)}
+
+.chat-box{
+  position:fixed;
+  right:22px;
+  bottom:92px;
+  width:min(370px,calc(100% - 30px));
+  height:500px;
+  background:#0d0d12;
+  border:1px solid var(--border);
+  border-radius:16px;
+  overflow:hidden;
+  z-index:350;
+  box-shadow:0 20px 60px rgba(0,0,0,.55);
+  display:flex;
+  flex-direction:column;
+  opacity:0;
+  pointer-events:none;
+  transform:translateY(15px) scale(.97);
+  transition:.25s;
+}
+.chat-box.open{
+  opacity:1;
+  pointer-events:auto;
+  transform:translateY(0) scale(1);
+}
+.chat-head{
+  padding:16px 18px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  background:#15151d;
+  border-bottom:1px solid var(--border);
+}
+.chat-head strong{
+  font-family:Orbitron,sans-serif;
+  font-size:14px;
+}
+.chat-status{
+  color:#7ee787;
+  font-size:10px;
+  margin-top:4px;
+}
+.chat-close{
+  background:none;
+  border:0;
+  font-size:18px;
+}
+.chat-messages{
+  flex:1;
+  overflow:auto;
+  padding:16px;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+.chat-message{
+  max-width:82%;
+  padding:10px 12px;
+  border-radius:12px;
+  font-size:12px;
+  line-height:1.5;
+}
+.chat-message.bot{
+  align-self:flex-start;
+  background:#191920;
+  border:1px solid var(--border);
+}
+.chat-message.user{
+  align-self:flex-end;
+  background:var(--purple);
+}
+.chat-time{
+  display:block;
+  margin-top:4px;
+  opacity:.55;
+  font-size:9px;
+}
+.chat-form{
+  display:flex;
+  gap:8px;
+  padding:12px;
+  border-top:1px solid var(--border);
+  background:#111118;
+}
+.chat-input{
+  flex:1;
+  min-width:0;
+  background:#191920;
+  color:white;
+  border:1px solid var(--border);
+  border-radius:8px;
+  padding:11px;
+  outline:none;
+  font-size:12px;
+}
+.chat-input:focus{border-color:var(--purple)}
+.chat-send{
+  width:45px;
+  border:0;
+  border-radius:8px;
+  background:var(--purple);
+  color:white;
+  font-size:16px;
+}
+@media(max-width:700px){
+  .chat-launcher{right:15px;bottom:15px}
+  .chat-box{
+    right:15px;
+    bottom:85px;
+    height:470px;
+  }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- ================= HEADER ================= -->
+
+<header>
+
+  <a href="#home" class="logo">
+    VY<span>TRIX</span>
+  </a>
+
+  <nav id="nav">
+
+    <a href="#home">Home</a>
+    <a href="#shop">Shop</a>
+    <a href="#categories">Coolers</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+
+  </nav>
+
+  <div>
+
+    <button class="cart-btn" onclick="openCart()">
+      🛒
+      <span class="cart-count" id="cartCount">0</span>
+    </button>
+
+    <button class="menu" onclick="toggleMenu()">
+      ☰
+    </button>
+
+  </div>
+
+</header>
+
+
+<!-- =====================================================
+     MANUAL BANNER SLIDER
+
+     REPLACE THESE 3 IMAGE URLS WITH YOUR POSTERS.
+
+     IMPORTANT:
+     Images are NOT cropped.
+     Full poster will be shown.
+===================================================== -->
+
+<div class="header-slider">
+
+  <div class="slider-window">
+
+    <div class="slider-track" id="sliderTrack">
+
+      <!-- BANNER 1 -->
+      <div class="slide">
+        <img
+          src="https://i.postimg.cc/dtFRBWW4/IMG-9404.png"
+          alt="VYTRIX Banner 1"
+        >
+      </div>
+
+      <!-- BANNER 2 -->
+      <div class="slide">
+        <img
+          src="https://i.postimg.cc/N0Zmrb9C/IMG-9405.png"
+          alt="VYTRIX Banner 2"
+        >
+      </div>
+
+      <!-- BANNER 3 -->
+      <div class="slide">
+        <img
+          src="https://i.postimg.cc/Wb4zTgtX/IMG-9406.png"
+          alt="VYTRIX Banner 3"
+        >
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- LEFT -->
+  <button
+    class="slider-arrow slider-prev"
+    onclick="changeSlide(-1)"
+  >
+    ‹
+  </button>
+
+
+  <!-- RIGHT -->
+  <button
+    class="slider-arrow slider-next"
+    onclick="changeSlide(1)"
+  >
+    ›
+  </button>
+
+
+  <!-- DOTS -->
+  <div class="slider-dots">
+
+    <button
+      class="slider-dot active"
+      onclick="goToSlide(0)"
+    ></button>
+
+    <button
+      class="slider-dot"
+      onclick="goToSlide(1)"
+    ></button>
+
+    <button
+      class="slider-dot"
+      onclick="goToSlide(2)"
+    ></button>
+
+  </div>
+
+</div>
+
+
+<!-- ================= HERO ================= -->
+
+<section class="hero" id="home">
+
+  <div class="hero-content">
+
+    <div class="eyebrow">
+      NEXT LEVEL PHONE COOLING
+    </div>
+
+    <h1>
+      KEEP<br>
+      <span>IT COOL.</span>
+    </h1>
+
+    <p>
+      High-performance gaming phone coolers built for
+      players who demand better performance during
+      every match.
+    </p>
+
+    <a href="#shop" class="btn primary">
+      SHOP COOLERS →
+    </a>
+
+  </div>
+
+  <div class="hero-glow"></div>
+  <div class="grid-bg"></div>
+
+</section>
+
+
+<!-- ================= TICKER ================= -->
+
+<div class="ticker">
+
+  <div>
+    VYTRIX • PHONE COOLERS • COOLER GAMING •
+    VYTRIX • PHONE COOLERS • COOLER GAMING •
+    VYTRIX • PHONE COOLERS • COOLER GAMING •
+  </div>
+
+</div>
+
+
+<!-- ================= CATEGORY ================= -->
+
+<section id="categories">
+
+  <div class="section-title">
+
+    <div class="eyebrow">
+      EXPLORE
+    </div>
+
+    <h2>
+      SHOP <span>COOLERS</span>
+    </h2>
+
+  </div>
+
+  <div class="categories">
+
+    <button
+      class="category"
+      onclick="filterProducts('Phone Cooler')"
+    >
+
+      <span class="category-icon">
+        ❄️
+      </span>
+
+      <strong>
+        Gaming Phone Coolers
+      </strong>
+
+      <small>
+        Keep your phone cool during intense gaming sessions
+      </small>
+
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- ================= SHOP ================= -->
+
+<section id="shop">
+
+  <div class="shop-head">
+
+    <div class="section-title">
+
+      <div class="eyebrow">
+        VYTRIX STORE
+      </div>
+
+      <h2>
+        FEATURED <span>COOLERS</span>
+      </h2>
+
+    </div>
+
+    <div class="filters">
+
+      <button
+        class="filter active"
+        onclick="filterProducts('All',this)"
+      >
+        All
+      </button>
+
+      <button
+        class="filter"
+        onclick="filterProducts('Phone Cooler',this)"
+      >
+        Phone Coolers
+      </button>
+
+    </div>
+
+  </div>
+
+  <div class="products" id="products"></div>
+
+</section>
+
+
+<!-- ================= PROMO ================= -->
+
+<div class="promo">
+
+  <div>
+
+    <div class="eyebrow">
+      WHY VYTRIX
+    </div>
+
+    <h2>
+      COOL DOWN.<br>
+      <span>PLAY HARDER.</span>
+    </h2>
+
+    <p>
+      VYTRIX focuses on gaming phone cooling solutions
+      designed for players who want stable performance,
+      comfort and a better gaming experience.
+    </p>
+
+  </div>
+
+  <div class="stats">
+
+    <div>
+      <strong>01</strong>
+      <span>Performance</span>
+    </div>
+
+    <div>
+      <strong>02</strong>
+      <span>Cooling</span>
+    </div>
+
+    <div>
+      <strong>03</strong>
+      <span>Style</span>
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- ================= ABOUT ================= -->
+
+<section class="about" id="about">
+
+  <div class="eyebrow">
+    ABOUT VYTRIX
+  </div>
+
+  <h2>
+    BUILT FOR THE <span>GRIND.</span>
+  </h2>
+
+  <p class="about-text">
+    VYTRIX is a gaming phone cooling brand focused on
+    making powerful, practical and stylish cooling
+    accessories accessible to modern mobile gamers.
+  </p>
+
+</section>
+
+
+<!-- ================= CONTACT ================= -->
+
+<section class="contact" id="contact">
+
+  <div>
+
+    <div class="eyebrow">
+      GET IN TOUCH
+    </div>
+
+    <h2>
+      LET'S <span>CONNECT.</span>
+    </h2>
+
+    <p class="about-text">
+      For orders, partnerships and product enquiries,
+      reach out to us on Instagram.
+    </p>
+
+  </div>
+
+  <a
+    class="outline"
+    href="https://www.instagram.com/sarojchhetri02?igsi=MW50MzlhYW1oazk2YQ%3D%3D&utm_source=qr"
+    target="_blank"
+  >
+    INSTAGRAM ↗
+  </a>
+
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+  <div class="footer-logo">
+    VYTRIX
+  </div>
+
+  <p>
+    © 2026 VYTRIX. All rights reserved.
+  </p>
+
+  <a href="#home">
+    Back to top ↑
+  </a>
+
+</footer>
+
+
+<!-- ================= CART ================= -->
+
+<div class="cart-panel" id="cartPanel">
+
+  <div class="cart-head">
+
+    <h3>
+      YOUR CART
+    </h3>
+
+    <button
+      class="close"
+      onclick="closeCart()"
+    >
+      ✕
+    </button>
+
+  </div>
+
+  <div
+    class="cart-items"
+    id="cartItems"
+  ></div>
+
+  <div class="cart-bottom">
+
+    <div class="total">
+
+      <span>
+        Subtotal
+      </span>
+
+      <strong id="cartTotal">
+        ¥0
+      </strong>
+
+    </div>
+
+    <button
+      class="btn primary checkout"
+      onclick="checkout()"
+    >
+      CHECKOUT →
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- ================= OVERLAY ================= -->
+
+<div
+  class="overlay"
+  id="overlay"
+  onclick="closeEverything()"
+></div>
+
+
+<!-- ================= MODAL ================= -->
+
+<div
+  class="modal"
+  id="modal"
+>
+
+  <button
+    class="modal-close"
+    onclick="closeModal()"
+  >
+    ✕
+  </button>
+
+  <div id="modalContent"></div>
+
+</div>
+
+
+<!-- ================= TOAST ================= -->
+
+<div class="toast" id="toast"></div>
+
+
+
+<!-- ================= LIVE CHAT ================= -->
+<button class="chat-launcher" id="chatLauncher" onclick="toggleChat()" aria-label="Open live chat">💬</button>
+
+<div class="chat-box" id="chatBox">
+  <div class="chat-head">
+    <div>
+      <strong>VYTRIX LIVE CHAT</strong>
+      <div class="chat-status">● Online</div>
+    </div>
+    <button class="chat-close" onclick="toggleChat()">✕</button>
+  </div>
+
+  <div class="chat-messages" id="chatMessages">
+    <div class="chat-message bot">
+      Hi! 👋 Welcome to VYTRIX. How can we help you?
+      <span class="chat-time">Now</span>
+    </div>
+  </div>
+
+  <form class="chat-form" onsubmit="sendChatMessage(event)">
+    <input
+      class="chat-input"
+      id="chatInput"
+      type="text"
+      placeholder="Type your message..."
+      autocomplete="off"
+      maxlength="500"
+      required
+    >
+    <button class="chat-send" type="submit">➤</button>
+  </form>
+</div>
+
+<script>
+
+/* ================= LIVE CHAT ================= */
+function toggleChat(){
+  document.getElementById("chatBox").classList.toggle("open");
+  if(document.getElementById("chatBox").classList.contains("open")){
+    setTimeout(() => document.getElementById("chatInput").focus(), 150);
+  }
+}
+
+function addChatMessage(text,type){
+  const messages=document.getElementById("chatMessages");
+  const div=document.createElement("div");
+  div.className="chat-message "+type;
+  div.textContent=text;
+
+  const time=document.createElement("span");
+  time.className="chat-time";
+  time.textContent="Now";
+  div.appendChild(time);
+
+  messages.appendChild(div);
+  messages.scrollTop=messages.scrollHeight;
+}
+
+function sendChatMessage(event){
+  event.preventDefault();
+
+  const input=document.getElementById("chatInput");
+  const text=input.value.trim();
+  if(!text) return;
+
+  addChatMessage(text,"user");
+  input.value="";
+
+  // Demo auto-reply. Replace this section with your real chat backend/API.
+  setTimeout(() => {
+    addChatMessage(
+      "Thanks for contacting VYTRIX! A support member will reply soon. 🎮",
+      "bot"
+    );
+  },700);
+}
+
+
+/* =====================================================
+   MANUAL HEADER SLIDER
+===================================================== */
+
+let currentSlide = 0;
+
+const sliderTrack =
+  document.getElementById("sliderTrack");
+
+const sliderDots =
+  document.querySelectorAll(".slider-dot");
+
+
+function updateSlider(){
+
+  sliderTrack.style.transform =
+    "translateX(-" +
+    (currentSlide * 100) +
+    "%)";
+
+
+  sliderDots.forEach(
+    (dot,index) => {
+
+      dot.classList.toggle(
+        "active",
+        index === currentSlide
+      );
+
+    }
+  );
+
+}
+
+
+function changeSlide(direction){
+
+  currentSlide += direction;
+
+
+  if(currentSlide < 0){
+
+    currentSlide = 2;
+
+  }
+
+
+  if(currentSlide > 2){
+
+    currentSlide = 0;
+
+  }
+
+
+  updateSlider();
+
+}
+
+
+function goToSlide(index){
+
+  currentSlide = index;
+
+  updateSlider();
+
+}
+
+
+/* =====================================================
+   VYTRIX PRODUCTS
+===================================================== */
+
+const products = [
+
+  {
+    id:1,
+
+    name:"VYTRIX Frost X1",
+
+    category:"Phone Cooler",
+
+    originalPrice:1800,
+
+    price:1200,
+
+    image:"https://i.postimg.cc/dtFRBWW4/IMG-9404.png",
+
+    description:
+      "High-performance magnetic phone cooler designed to keep your device cool during long and intense gaming sessions."
+  },
+
+  {
+    id:2,
+
+    name:"VYTRIX Frost Mini",
+
+    category:"Phone Cooler",
+
+    originalPrice:1550,
+
+    price:1120,
+
+    image:"https://i.postimg.cc/N0Zmrb9C/IMG-9405.png",
+
+    description:
+      "Compact gaming phone cooler with strong airflow, easy setup and a lightweight design for mobile gamers."
+  },
+
+  {
+    id:3,
+
+    name:"VYTRIX Ice Pro",
+
+    category:"Phone Cooler",
+
+    originalPrice:800,
+
+    price:390,
+
+    image:"https://i.postimg.cc/Wb4zTgtX/IMG-9406.png",
+
+    description:
+      "Premium phone cooling solution designed for competitive mobile gaming and extended gaming sessions."
+  }
+
+];
+
+
+/* =====================================================
+   CART
+===================================================== */
+
+let cart =
+  JSON.parse(
+    localStorage.getItem("vytrixCart")
+  ) || [];
+
+
+/* =====================================================
+   MONEY
+===================================================== */
+
+function money(number){
+
+  return "¥" +
+    number.toLocaleString("ja-JP");
+
+}
+
+
+/* =====================================================
+   DISCOUNT
+===================================================== */
+
+function discountPercent(original,current){
+
+  if(
+    !original ||
+    original <= current
+  ){
+
+    return 0;
+
+  }
+
+  return Math.round(
+    ((original-current) / original) * 100
+  );
+
+}
+
+
+/* =====================================================
+   IMAGE ERROR FALLBACK
+===================================================== */
+
+function imageError(image,emoji){
+
+  image.style.display="none";
+
+  const fallback =
+    document.createElement("span");
+
+  fallback.className="image-fallback";
+
+  fallback.textContent=emoji;
+
+  image.parentElement.appendChild(fallback);
+
+}
+
+
+/* =====================================================
+   RENDER PRODUCTS
+===================================================== */
+
+function renderProducts(category="All"){
+
+  const container =
+    document.getElementById("products");
+
+  let list = products;
+
+
+  if(category !== "All"){
+
+    list =
+      products.filter(
+        product =>
+          product.category === category
+      );
+
+  }
+
+
+  container.innerHTML =
+    list.map(product => {
+
+      const discount =
+        discountPercent(
+          product.originalPrice,
+          product.price
+        );
+
+
+      let priceHTML;
+
+
+      if(discount > 0){
+
+        priceHTML = `
+
+          <div class="price-box">
+
+            <span class="original-price">
+              ${money(product.originalPrice)}
+            </span>
+
+            <span class="sale-price">
+              ${money(product.price)}
+            </span>
+
+          </div>
+
+        `;
+
+      }
+
+      else{
+
+        priceHTML = `
+
+          <div class="price-box">
+
+            <span class="no-discount">
+              ${money(product.price)}
+            </span>
+
+          </div>
+
+        `;
+
+      }
+
+
+      return `
+
+        <div class="product">
+
+          <div class="product-image">
+
+            ${
+              discount > 0
+
+              ? `
+                <div class="discount-badge">
+                  ${discount}% OFF
+                </div>
+              `
+
+              : ""
+            }
+
+            <img
+              src="${product.image}"
+              alt="${product.name}"
+              onerror="imageError(this,'❄️')"
+            >
+
+          </div>
+
+
+          <div class="product-info">
+
+            <div class="product-category">
+              ${product.category}
+            </div>
+
+
+            <h3>
+              ${product.name}
+            </h3>
+
+
+            ${priceHTML}
+
+
+            <div class="product-buttons">
+
+              <button
+                class="add"
+                onclick="addToCart(${product.id})"
+              >
+                ADD TO CART
+              </button>
+
+
+              <button
+                class="view"
+                onclick="showProduct(${product.id})"
+              >
+                VIEW
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      `;
+
+    }).join("");
+
+}
+
+
+/* =====================================================
+   FILTER
+===================================================== */
+
+function filterProducts(category,button){
+
+  renderProducts(category);
+
+
+  document
+    .querySelectorAll(".filter")
+    .forEach(
+      item =>
+        item.classList.remove("active")
+    );
+
+
+  if(button){
+
+    button.classList.add("active");
+
+  }
+
+
+  document
+    .getElementById("shop")
+    .scrollIntoView({
+      behavior:"smooth"
+    });
+
+}
+
+
+/* =====================================================
+   ADD TO CART
+===================================================== */
+
+function addToCart(id){
+
+  const existing =
+    cart.find(
+      item => item.id === id
+    );
+
+
+  if(existing){
+
+    existing.quantity++;
+
+  }
+
+  else{
+
+    cart.push({
+
+      id:id,
+
+      quantity:1
+
+    });
+
+  }
+
+
+  saveCart();
+
+  showToast("Added to cart ✓");
+
+  openCart();
+
+}
+
+
+/* =====================================================
+   SAVE CART
+===================================================== */
+
+function saveCart(){
+
+  localStorage.setItem(
+    "vytrixCart",
+    JSON.stringify(cart)
+  );
+
+  renderCart();
+
+}
+
+
+/* =====================================================
+   REMOVE ITEM
+===================================================== */
+
+function removeItem(id){
+
+  cart =
+    cart.filter(
+      item => item.id !== id
+    );
+
+  saveCart();
+
+  showToast("Item removed");
+
+}
+
+
+/* =====================================================
+   CART DISPLAY
+===================================================== */
+
+function renderCart(){
+
+  const container =
+    document.getElementById(
+      "cartItems"
+    );
+
+
+  const count =
+    cart.reduce(
+      (total,item) =>
+        total + item.quantity,
+      0
+    );
+
+
+  document.getElementById(
+    "cartCount"
+  ).textContent = count;
+
+
+  if(cart.length === 0){
+
+    container.innerHTML = `
+
+      <div class="empty">
+
+        Your cart is empty.
+
+        <br><br>
+
+        Ready to level up?
+
+      </div>
+
+    `;
+
+  }
+
+  else{
+
+    container.innerHTML =
+      cart.map(item => {
+
+        const product =
+          products.find(
+            p => p.id === item.id
+          );
+
+
+        return `
+
+          <div class="cart-item">
+
+            <div class="cart-icon">
+
+              <img
+                src="${product.image}"
+                alt="${product.name}"
+                onerror="this.style.display='none'"
+              >
+
+            </div>
+
+
+            <div>
+
+              <h4>
+                ${product.name}
+              </h4>
+
+
+              <p>
+
+                ${money(product.price)}
+
+                ×
+
+                ${item.quantity}
+
+              </p>
+
+
+              <button
+                class="remove"
+                onclick="removeItem(${product.id})"
+              >
+                REMOVE
+              </button>
+
+            </div>
+
+          </div>
+
+        `;
+
+      }).join("");
+
+  }
+
+
+  const total =
+    cart.reduce(
+      (sum,item) => {
+
+        const product =
+          products.find(
+            p => p.id === item.id
+          );
+
+
+        return sum +
+          product.price *
+          item.quantity;
+
+      },
+      0
+    );
+
+
+  document.getElementById(
+    "cartTotal"
+  ).textContent =
+    money(total);
+
+}
+
+
+/* =====================================================
+   OPEN CART
+===================================================== */
+
+function openCart(){
+
+  document
+    .getElementById("cartPanel")
+    .classList.add("open");
+
+
+  document
+    .getElementById("overlay")
+    .classList.add("show");
+
+}
+
+
+/* =====================================================
+   CLOSE CART
+===================================================== */
+
+function closeCart(){
+
+  document
+    .getElementById("cartPanel")
+    .classList.remove("open");
+
+
+  document
+    .getElementById("overlay")
+    .classList.remove("show");
+
+}
+
+
+/* =====================================================
+   PRODUCT MODAL
+===================================================== */
+
+function showProduct(id){
+
+  const product =
+    products.find(
+      p => p.id === id
+    );
+
+
+  const discount =
+    discountPercent(
+      product.originalPrice,
+      product.price
+    );
+
+
+  let priceHTML;
+
+
+  if(discount > 0){
+
+    priceHTML = `
+
+      <div class="price-box">
+
+        <span class="original-price">
+          ${money(product.originalPrice)}
+        </span>
+
+        <span class="sale-price">
+          ${money(product.price)}
+        </span>
+
+      </div>
+
+    `;
+
+  }
+
+  else{
+
+    priceHTML = `
+
+      <div class="price-box">
+
+        <span class="no-discount">
+          ${money(product.price)}
+        </span>
+
+      </div>
+
+    `;
+
+  }
+
+
+  document.getElementById(
+    "modalContent"
+  ).innerHTML = `
+
+    <div class="modal-product">
+
+      <div class="modal-image">
+
+        <img
+          src="${product.image}"
+          alt="${product.name}"
+          onerror="this.style.display='none'"
+        >
+
+      </div>
+
+
+      <div class="modal-info">
+
+        <div class="product-category">
+          ${product.category}
+        </div>
+
+
+        <h2>
+          ${product.name}
+        </h2>
+
+
+        ${priceHTML}
+
+
+        ${
+          discount > 0
+
+          ? `
+            <p style="
+              color:#c084fc;
+              font-weight:bold;
+              margin-top:12px;
+            ">
+              Save ${discount}% today
+            </p>
+          `
+
+          : ""
+        }
+
+
+        <p>
+          ${product.description}
+        </p>
+
+
+        <button
+          class="btn primary"
+          onclick="
+            addToCart(${product.id});
+            closeModal();
+          "
+        >
+          ADD TO CART →
+        </button>
+
+      </div>
+
+    </div>
+
+  `;
+
+
+  document
+    .getElementById("modal")
+    .classList.add("show");
+
+
+  document
+    .getElementById("overlay")
+    .classList.add("show");
+
+}
+
+
+/* =====================================================
+   CLOSE MODAL
+===================================================== */
+
+function closeModal(){
+
+  document
+    .getElementById("modal")
+    .classList.remove("show");
+
+
+  document
+    .getElementById("overlay")
+    .classList.remove("show");
+
+}
+
+
+/* =====================================================
+   CLOSE EVERYTHING
+===================================================== */
+
+function closeEverything(){
+
+  closeCart();
+
+  closeModal();
+
+}
+
+
+/* =====================================================
+   MOBILE MENU
+===================================================== */
+
+function toggleMenu(){
+
+  document
+    .getElementById("nav")
+    .classList.toggle("open");
+
+}
+
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+function showToast(message){
+
+  const toast =
+    document.getElementById("toast");
+
+  toast.textContent = message;
+
+  toast.classList.add("show");
+
+
+  setTimeout(() => {
+
+    toast.classList.remove("show");
+
+  },2000);
+
+}
+
+
+/* =====================================================
+   CHECKOUT
+===================================================== */
+
+function checkout(){
+
+  if(cart.length === 0){
+
+    showToast("Your cart is empty.");
+
+    return;
+
+  }
+
+
+  alert(
+    "Checkout system can be connected here."
+  );
+
+}
+
+
+/* =====================================================
+   START WEBSITE
+===================================================== */
+
+renderProducts();
+
+renderCart();
+
+updateSlider();
+
+</script>
+
+</body>
+</html>
