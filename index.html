@@ -1206,14 +1206,325 @@ footer{
   color:white;
   font-size:16px;
 }
+.typing-indicator{
+  animation:pulse 1.5s infinite;
+}
+@keyframes pulse{
+  0%,100%{opacity:0.5;}
+  50%{opacity:1;}
+}
 @media(max-width:700px){
   .chat-launcher{right:15px;bottom:15px}
-  .chat-box{
-    right:15px;
-    bottom:85px;
-    height:470px;
-  }
+   .chat-box{
+     right:15px;
+     bottom:85px;
+     height:470px;
+   }
+ }
+
+/* ================= ADMIN PANEL ================= */
+.admin-panel{
+  position:fixed;
+  inset:0;
+  z-index:400;
+  background:#0a0a0f;
+  display:none;
+  flex-direction:column;
+  overflow:hidden;
 }
+.admin-panel.open{display:flex}
+.admin-head{
+  padding:22px 30px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border-bottom:1px solid var(--border);
+  background:#0d0d12;
+  flex-wrap:wrap;
+  gap:15px;
+}
+.admin-stats{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+}
+.admin-stat{
+  background:#111118;
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:12px 18px;
+  min-width:120px;
+}
+.admin-stat strong{
+  display:block;
+  font-family:Orbitron,sans-serif;
+  font-size:20px;
+  color:var(--purple2);
+}
+.admin-stat span{
+  font-size:11px;
+  color:var(--muted);
+}
+.admin-search{
+  display:flex;
+  gap:8px;
+}
+.admin-search input{
+  background:#111118;
+  color:white;
+  border:1px solid var(--border);
+  border-radius:8px;
+  padding:9px 14px;
+  font-size:13px;
+  outline:none;
+  min-width:220px;
+}
+.admin-search input:focus{border-color:var(--purple)}
+.admin-tabs{
+  display:flex;
+  gap:4px;
+  padding:15px 30px;
+  border-bottom:1px solid var(--border);
+  background:#0d0d12;
+  flex-wrap:wrap;
+}
+.admin-tab{
+  background:none;
+  border:0;
+  color:var(--muted);
+  padding:10px 18px;
+  border-radius:8px;
+  font-size:13px;
+  font-weight:600;
+  transition:.2s;
+}
+.admin-tab.active,.admin-tab:hover{
+  background:var(--purple);
+  color:white;
+}
+.admin-content{
+  flex:1;
+  overflow:auto;
+  padding:25px 30px;
+}
+.admin-tab-content{display:none}
+.admin-tab-content.active{display:block}
+
+.admin-products-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+  gap:18px;
+}
+.admin-product-card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:14px;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+}
+.admin-product-card img{
+  width:100%;
+  height:180px;
+  object-fit:contain;
+  background:#111118;
+  padding:15px;
+}
+.admin-product-info{padding:16px;flex:1;display:flex;flex-direction:column;gap:8px;}
+.admin-product-info h3{font-family:Orbitron,sans-serif;font-size:14px;}
+.admin-product-info p{color:var(--muted);font-size:12px;}
+.admin-stock{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  background:#191920;
+  border:1px solid var(--border);
+  padding:4px 10px;
+  border-radius:20px;
+  font-size:11px;
+  color:var(--muted);
+}
+.admin-stock.low{color:var(--danger);border-color:var(--danger);}
+.admin-stock.ok{color:#7ee787;border-color:#7ee787;}
+.admin-product-actions{
+  display:flex;
+  gap:8px;
+  padding:0 16px 16px;
+}
+.admin-product-actions button{
+  flex:1;
+  padding:10px;
+  border-radius:7px;
+  font-size:11px;
+  font-weight:bold;
+  border:0;
+  cursor:pointer;
+}
+.admin-edit{background:#1e1e2a;border:1px solid var(--border);color:var(--text);}
+.admin-delete{background:rgba(255,85,119,.15);border:1px solid var(--danger);color:var(--danger);}
+
+.admin-order-card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:20px;
+  margin-bottom:15px;
+}
+.admin-order-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:15px;
+  padding-bottom:15px;
+  border-bottom:1px solid var(--border);
+  flex-wrap:wrap;
+  gap:10px;
+}
+.admin-order-id{font-family:Orbitron,sans-serif;font-size:13px;color:var(--purple2);}
+.admin-order-date{color:var(--muted);font-size:11px;}
+.admin-order-status{
+  padding:5px 12px;
+  border-radius:6px;
+  font-size:11px;
+  font-weight:bold;
+  border:0;
+  cursor:pointer;
+}
+.admin-order-status.new{background:rgba(139,92,246,.2);color:var(--purple2);border:1px solid var(--purple);}
+.admin-order-status.shipped{background:rgba(255,170,50,.15);color:#ffaa32;border:1px solid #ffaa32;}
+.admin-order-status.delivered{background:rgba(126,231,135,.1);color:#7ee787;border:1px solid #7ee787;}
+.admin-order-status.cancelled{background:rgba(255,85,119,.15);color:var(--danger);border:1px solid var(--danger);}
+.admin-order-items{margin-bottom:15px;}
+.admin-order-item{
+  display:flex;
+  justify-content:space-between;
+  padding:8px 0;
+  border-bottom:1px solid rgba(255,255,255,.04);
+  font-size:13px;
+}
+.admin-order-total{
+  display:flex;
+  justify-content:space-between;
+  font-weight:bold;
+  font-size:16px;
+  margin-top:10px;
+  padding-top:10px;
+  border-top:1px solid var(--border);
+}
+.admin-order-customer{
+  background:#191920;
+  border:1px solid var(--border);
+  border-radius:8px;
+  padding:12px;
+  margin-top:12px;
+  font-size:12px;
+  line-height:1.8;
+  color:var(--muted);
+}
+.admin-order-customer strong{color:var(--text);}
+.admin-order-actions{
+  display:flex;
+  gap:8px;
+  margin-top:12px;
+}
+.admin-order-actions button{
+  padding:8px 14px;
+  border-radius:7px;
+  font-size:11px;
+  font-weight:bold;
+  border:1px solid var(--border);
+  background:#1e1e2a;
+  color:var(--text);
+  cursor:pointer;
+}
+.admin-order-actions button:hover{background:#2a2a3a;}
+
+.admin-message-card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:16px;
+  margin-bottom:12px;
+}
+.admin-message-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:10px;
+}
+.admin-message-sender{font-weight:bold;font-size:13px;color:var(--purple2);}
+.admin-message-time{color:var(--muted);font-size:11px;}
+.admin-message-text{font-size:13px;line-height:1.6;color:var(--text);}
+.admin-reply-form{
+  display:flex;
+  gap:8px;
+  margin-top:12px;
+  padding-top:12px;
+  border-top:1px solid var(--border);
+}
+.admin-reply-form input{
+  flex:1;
+  background:#191920;
+  color:white;
+  border:1px solid var(--border);
+  border-radius:8px;
+  padding:10px;
+  font-size:12px;
+  outline:none;
+}
+.admin-reply-form input:focus{border-color:var(--purple)}
+.admin-reply-form button{
+  padding:10px 16px;
+  border-radius:8px;
+  background:var(--purple);
+  color:white;
+  border:0;
+  font-weight:bold;
+  font-size:12px;
+  cursor:pointer;
+}
+
+.admin-empty{
+  text-align:center;
+  color:var(--muted);
+  padding:60px 20px;
+  font-size:14px;
+}
+
+/* ================= CHECKOUT ================= */
+.checkout-item{
+  display:flex;
+  gap:12px;
+  padding:12px 0;
+  border-bottom:1px solid var(--border);
+  align-items:center;
+}
+.checkout-item img{
+  width:50px;
+  height:50px;
+  object-fit:contain;
+  background:#191920;
+  border-radius:8px;
+  padding:5px;
+}
+.checkout-item-info{flex:1;}
+.checkout-item-info h4{font-size:13px;margin-bottom:4px;}
+.checkout-item-info p{color:var(--muted);font-size:12px;}
+
+@media(max-width:900px){
+  .admin-products-grid{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:700px){
+  .admin-products-grid{grid-template-columns:1fr;}
+  .admin-head{padding:15px 20px;}
+  .admin-tabs{padding:10px 20px;}
+  .admin-content{padding:20px;}
+  .admin-stats{width:100%;}
+  .admin-stat{flex:1;}
+  .admin-search{width:100%;}
+  .admin-search input{flex:1;min-width:0;}
+}
+
 
 </style>
 </head>
@@ -1243,6 +1554,10 @@ footer{
     <button class="cart-btn" onclick="openCart()">
       🛒
       <span class="cart-count" id="cartCount">0</span>
+    </button>
+
+    <button class="cart-btn" onclick="openAdminLogin()" title="Admin">
+      ⚙️
     </button>
 
     <button class="menu" onclick="toggleMenu()">
@@ -1686,7 +2001,11 @@ footer{
 
   <div class="chat-messages" id="chatMessages">
     <div class="chat-message bot">
-      Hi! 👋 Welcome to VYTRIX. How can we help you?
+      👋 Welcome to VYTRIX! How can we help you today?<br><br>
+      You can ask about:<br>
+      • Orders & Shipping<br>
+      • Products & Stock<br>
+      • Returns & Support
       <span class="chat-time">Now</span>
     </div>
   </div>
@@ -1705,49 +2024,211 @@ footer{
   </form>
 </div>
 
+<!-- ================= ADMIN LOGIN MODAL ================= -->
+<div class="modal" id="adminLoginModal">
+  <button class="modal-close" onclick="closeAdminLogin()">✕</button>
+  <div style="max-width:400px;margin:40px auto;text-align:center;">
+    <h2 style="font-family:Orbitron,sans-serif;font-size:28px;margin-bottom:10px;">ADMIN</h2>
+    <p style="color:var(--muted);margin-bottom:25px;">Enter password to access admin panel</p>
+    <input type="password" id="adminPassword" placeholder="Password" style="width:100%;padding:14px;background:#191920;color:white;border:1px solid var(--border);border-radius:8px;font-size:14px;outline:none;margin-bottom:15px;" onkeydown="if(event.key==='Enter')loginAdmin()">
+    <button class="btn primary" style="width:100%;justify-content:center;" onclick="loginAdmin()">LOGIN</button>
+    <p id="adminLoginError" style="color:var(--danger);font-size:12px;margin-top:10px;display:none;">Incorrect password</p>
+  </div>
+</div>
+
+<!-- ================= ADMIN PANEL ================= -->
+<div class="admin-panel" id="adminPanel">
+  <div class="admin-head">
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <div>
+        <h2 style="font-family:Orbitron,sans-serif;font-size:22px;">VYTRIX ADMIN</h2>
+        <p style="color:var(--muted);font-size:12px;margin-top:4px;">Manage products, orders and messages</p>
+      </div>
+      <div class="admin-stats" id="adminStats">
+        <div class="admin-stat"><strong id="statProducts">0</strong><span>Products</span></div>
+        <div class="admin-stat"><strong id="statOrders">0</strong><span>Orders</span></div>
+        <div class="admin-stat"><strong id="statMessages">0</strong><span>Messages</span></div>
+      </div>
+    </div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
+      <div class="admin-search">
+        <input type="text" id="adminSearchInput" placeholder="Search products, orders..." oninput="handleAdminSearch(this.value)">
+      </div>
+      <button class="btn primary" onclick="openProductForm()">+ ADD PRODUCT</button>
+      <button class="outline" onclick="logoutAdmin()">LOGOUT</button>
+      <button class="outline" onclick="closeAdminPanel()">✕</button>
+    </div>
+  </div>
+
+  <div class="admin-tabs">
+    <button class="admin-tab active" onclick="switchAdminTab('products',this)">Products</button>
+    <button class="admin-tab" onclick="switchAdminTab('orders',this)">Orders</button>
+    <button class="admin-tab" onclick="switchAdminTab('messages',this)">Messages</button>
+  </div>
+
+  <div class="admin-content">
+    <!-- PRODUCTS TAB -->
+    <div class="admin-tab-content active" id="tab-products">
+      <div class="admin-products-grid" id="adminProductsList"></div>
+    </div>
+
+    <!-- ORDERS TAB -->
+    <div class="admin-tab-content" id="tab-orders">
+      <div id="adminOrdersList"></div>
+    </div>
+
+    <!-- MESSAGES TAB -->
+    <div class="admin-tab-content" id="tab-messages">
+      <div id="adminMessagesList"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ================= PRODUCT FORM MODAL ================= -->
+<div class="modal" id="productFormModal">
+  <button class="modal-close" onclick="closeProductForm()">✕</button>
+  <div style="max-width:600px;margin:30px auto;">
+    <h2 style="font-family:Orbitron,sans-serif;font-size:24px;margin-bottom:20px;" id="productFormTitle">ADD PRODUCT</h2>
+    <form onsubmit="saveProduct(event)">
+      <input type="hidden" id="productId">
+      <div style="margin-bottom:15px;">
+        <label style="display:block;font-size:12px;color:var(--muted);margin-bottom:6px;">Product Name</label>
+        <input type="text" id="productName" required style="width:100%;padding:12px;background:#191920;color:white;border:1px solid var(--border);border-radius:8px;font-size:13px;outline:none;" placeholder="e.g. VYTRIX Frost X1">
+      </div>
+      <div style="margin-bottom:15px;">
+        <label style="display:block;font-size:12px;color:var(--muted);margin-bottom:6px;">Category</label>
+        <select id="productCategory" required style="width:100%;padding:12px;background:#191920;color:white;border:1px solid var(--border);border-radius:8px;font-size:13px;outline:none;">
+          <option value="Phone Cooler">Phone Cooler</option>
+          <option value="Accessory">Accessory</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:15px;margin-bottom:15px;">
+        <div>
+          <label style="display:block;font-size:12px;color:var(--muted);margin-bottom:6px;">Price (¥)</label>
+          <input type="number" id="productPrice" required min="0" style="width:100%;padding:12px;background:#191920;color:white;border:1px solid var(--border);border-radius:8px;font-size:13px;outline:none;" placeholder="1200">
+        </div>
+        <div>
+          <label style="display:block;font-size:12px;color:var(--muted);margin-bottom:6px;">Original Price (¥) (optional)</label>
+          <input type="number" id="productOriginalPrice" min="0" style="width:100%;padding:12px;background:#191920;color:white;border:1px solid var(--border);border-radius:8px;font-size:13px;outline:none;" placeholder="1800">
+        </div>
+        <div>
+          <label style="display:block;font-size:12px;color:var(--muted);margin-bottom:6px;">Stock</label>
+          <input type="number" id="productStock" min="0" value="50" required style="width:100%;padding:12px;background:#191920;color:white;border:1px solid var(--border);border-radius:8px;font-size:13px;outline:none;" placeholder="50">
+        </div>
+      </div>
+      <div style="margin-bottom:15px;">
+        <label style="display:block;font-size:12px;color:var(--muted);margin-bottom:6px;">Image URL</label>
+        <input type="url" id="productImage" required style="width:100%;padding:12px;background:#191920;color:white;border:1px solid var(--border);border-radius:8px;font-size:13px;outline:none;" placeholder="https://...">
+      </div>
+      <div style="margin-bottom:20px;">
+        <label style="display:block;font-size:12px;color:var(--muted);margin-bottom:6px;">Description</label>
+        <textarea id="productDescription" rows="3" required style="width:100%;padding:12px;background:#191920;color:white;border:1px solid var(--border);border-radius:8px;font-size:13px;outline:none;resize:vertical;" placeholder="Product description..."></textarea>
+      </div>
+      <button type="submit" class="btn primary" style="width:100%;justify-content:center;" id="productSaveBtn">SAVE PRODUCT</button>
+    </form>
+  </div>
+</div>
+
+<!-- ================= CHECKOUT MODAL ================= -->
+<div class="modal" id="checkoutModal">
+  <button class="modal-close" onclick="closeCheckout()">✕</button>
+  <div style="max-width:550px;margin:30px auto;">
+    <h2 style="font-family:Orbitron,sans-serif;font-size:24px;margin-bottom:20px;">CHECKOUT</h2>
+    <form onsubmit="placeOrder(event)">
+      <div style="margin-bottom:15px;">
+        <label style="display:block;font-size:12px;color:var(--muted);margin-bottom:6px;">Full Name</label>
+        <input type="text" id="orderName" required style="width:100%;padding:12px;background:#191920;color:white;border:1px solid var(--border);border-radius:8px;font-size:13px;outline:none;" placeholder="Your name">
+      </div>
+      <div style="margin-bottom:15px;">
+        <label style="display:block;font-size:12px;color:var(--muted);margin-bottom:6px;">Phone Number</label>
+        <input type="tel" id="orderPhone" required style="width:100%;padding:12px;background:#191920;color:white;border:1px solid var(--border);border-radius:8px;font-size:13px;outline:none;" placeholder="Phone number">
+      </div>
+      <div style="margin-bottom:15px;">
+        <label style="display:block;font-size:12px;color:var(--muted);margin-bottom:6px;">Address</label>
+        <textarea id="orderAddress" rows="2" required style="width:100%;padding:12px;background:#191920;color:white;border:1px solid var(--border);border-radius:8px;font-size:13px;outline:none;resize:vertical;" placeholder="Delivery address"></textarea>
+      </div>
+      <div style="margin-bottom:20px;padding:15px;background:#191920;border:1px solid var(--border);border-radius:8px;">
+        <div style="display:flex;justify-content:space-between;margin-bottom:8px;">
+          <span style="color:var(--muted);">Subtotal</span>
+          <strong id="checkoutTotal">¥0</strong>
+        </div>
+        <div style="display:flex;justify-content:space-between;">
+          <span style="color:var(--muted);">Items</span>
+          <strong id="checkoutCount">0</strong>
+        </div>
+      </div>
+      <button type="submit" class="btn primary" style="width:100%;justify-content:center;">PLACE ORDER →</button>
+    </form>
+  </div>
+</div>
+
+
 <script>
 
 /* ================= LIVE CHAT ================= */
+let chatMessages = [];
+function loadChat(){
+  const saved = localStorage.getItem("vytrixChat");
+  if(saved){
+    chatMessages = JSON.parse(saved);
+    const container = document.getElementById("chatMessages");
+    container.innerHTML = "";
+    chatMessages.forEach(msg => addChatMessage(msg.text, msg.type, msg.time));
+  }
+}
+function saveChat(){
+  localStorage.setItem("vytrixChat", JSON.stringify(chatMessages));
+}
+function addChatMessage(text,type,time){
+  const messages=document.getElementById("chatMessages");
+  const div=document.createElement("div");
+  div.className="chat-message "+type;
+  const span=document.createElement("span");
+  span.textContent=text;
+  div.appendChild(span);
+  const timeSpan=document.createElement("span");
+  timeSpan.className="chat-time";
+  timeSpan.textContent=time || new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+  div.appendChild(timeSpan);
+  messages.appendChild(div);
+  messages.scrollTop=messages.scrollHeight;
+  if(!time){
+    chatMessages.push({text,type,time:timeSpan.textContent});
+    saveChat();
+  }
+}
 function toggleChat(){
   document.getElementById("chatBox").classList.toggle("open");
   if(document.getElementById("chatBox").classList.contains("open")){
     setTimeout(() => document.getElementById("chatInput").focus(), 150);
   }
 }
-
-function addChatMessage(text,type){
-  const messages=document.getElementById("chatMessages");
-  const div=document.createElement("div");
-  div.className="chat-message "+type;
-  div.textContent=text;
-
-  const time=document.createElement("span");
-  time.className="chat-time";
-  time.textContent="Now";
-  div.appendChild(time);
-
-  messages.appendChild(div);
-  messages.scrollTop=messages.scrollHeight;
-}
-
 function sendChatMessage(event){
   event.preventDefault();
-
   const input=document.getElementById("chatInput");
   const text=input.value.trim();
   if(!text) return;
-
   addChatMessage(text,"user");
   input.value="";
-
-  // Demo auto-reply. Replace this section with your real chat backend/API.
+  
+  const messages=document.getElementById("chatMessages");
+  const typingDiv=document.createElement("div");
+  typingDiv.className="chat-message bot typing-indicator";
+  typingDiv.innerHTML='<span style="opacity:0.7;">Support is typing...</span>';
+  messages.appendChild(typingDiv);
+  messages.scrollTop=messages.scrollHeight;
+  
   setTimeout(() => {
-    addChatMessage(
-      "Thanks for contacting VYTRIX! A support member will reply soon. 🎮",
-      "bot"
-    );
-  },700);
+    if(typingDiv.parentNode) typingDiv.parentNode.removeChild(typingDiv);
+    addChatMessage("Thanks for reaching out! Our support team will reply to you shortly. For urgent orders, please check your email. 🎮","bot");
+  },1200);
 }
+window.addEventListener("storage",function(e){
+  if(e.key==="vytrixChat"){
+    loadChat();
+  }
+});
 
 
 /* =====================================================
@@ -1819,63 +2300,55 @@ function goToSlide(index){
 
 
 /* =====================================================
-   VYTRIX PRODUCTS
+   VYTRIX PRODUCTS - Load from localStorage with fallback
 ===================================================== */
 
-const products = [
-
+const DEFAULT_PRODUCTS = [
   {
     id:1,
-
     name:"VYTRIX Frost X1",
-
     category:"Phone Cooler",
-
     originalPrice:1800,
-
     price:1200,
-
+    stock:50,
     image:"https://i.postimg.cc/dtFRBWW4/IMG-9404.png",
-
-    description:
-      "High-performance magnetic phone cooler designed to keep your device cool during long and intense gaming sessions."
+    description:"High-performance magnetic phone cooler designed to keep your device cool during long and intense gaming sessions."
   },
-
   {
     id:2,
-
     name:"VYTRIX Frost Mini",
-
     category:"Phone Cooler",
-
     originalPrice:1550,
-
     price:1120,
-
+    stock:35,
     image:"https://i.postimg.cc/N0Zmrb9C/IMG-9405.png",
-
-    description:
-      "Compact gaming phone cooler with strong airflow, easy setup and a lightweight design for mobile gamers."
+    description:"Compact gaming phone cooler with strong airflow, easy setup and a lightweight design for mobile gamers."
   },
-
   {
     id:3,
-
     name:"VYTRIX Ice Pro",
-
     category:"Phone Cooler",
-
     originalPrice:800,
-
     price:390,
-
+    stock:20,
     image:"https://i.postimg.cc/Wb4zTgtX/IMG-9406.png",
-
-    description:
-      "Premium phone cooling solution designed for competitive mobile gaming and extended gaming sessions."
+    description:"Premium phone cooling solution designed for competitive mobile gaming and extended gaming sessions."
   }
-
 ];
+
+function loadProducts(){
+  const saved = localStorage.getItem("vytrixProducts");
+  if(saved){
+    return JSON.parse(saved);
+  }
+  return [...DEFAULT_PRODUCTS];
+}
+
+function saveProducts(list){
+  localStorage.setItem("vytrixProducts", JSON.stringify(list));
+}
+
+let products = loadProducts();
 
 
 /* =====================================================
@@ -1945,13 +2418,13 @@ function imageError(image,emoji){
 /* =====================================================
    RENDER PRODUCTS
 ===================================================== */
-
 function renderProducts(category="All"){
 
   const container =
     document.getElementById("products");
 
   let list = products;
+
 
 
   if(category !== "All"){
@@ -1974,8 +2447,11 @@ function renderProducts(category="All"){
           product.price
         );
 
+      const outOfStock = product.stock !== undefined && product.stock <= 0;
+      const lowStock = product.stock !== undefined && product.stock > 0 && product.stock <= 10;
 
       let priceHTML;
+
 
 
       if(discount > 0){
@@ -2033,6 +2509,22 @@ function renderProducts(category="All"){
               : ""
             }
 
+            ${
+              outOfStock
+
+              ? `
+                <div class="discount-badge" style="background:#555;top:auto;bottom:14px;">
+                  OUT OF STOCK
+                </div>
+              `
+
+              : (lowStock ? `
+                <div class="discount-badge" style="background:#ffaa32;top:auto;bottom:14px;">
+                  LOW STOCK
+                </div>
+              ` : "")
+            }
+
             <img
               src="${product.image}"
               alt="${product.name}"
@@ -2062,8 +2554,9 @@ function renderProducts(category="All"){
               <button
                 class="add"
                 onclick="addToCart(${product.id})"
+                ${outOfStock ? 'disabled style="opacity:0.5;cursor:not-allowed;"' : ''}
               >
-                ADD TO CART
+                ${outOfStock ? 'OUT OF STOCK' : 'ADD TO CART'}
               </button>
 
 
@@ -2085,7 +2578,6 @@ function renderProducts(category="All"){
     }).join("");
 
 }
-
 
 /* =====================================================
    FILTER
@@ -2126,6 +2618,9 @@ function filterProducts(category,button){
 
 function addToCart(id){
 
+  const product = products.find(p => p.id === id);
+  if(!product) return;
+  
   const existing =
     cart.find(
       item => item.id === id
@@ -2133,13 +2628,19 @@ function addToCart(id){
 
 
   if(existing){
-
+    if(product.stock !== undefined && existing.quantity >= product.stock){
+      showToast("Not enough stock available!");
+      return;
+    }
     existing.quantity++;
 
   }
 
   else{
-
+    if(product.stock !== undefined && product.stock <= 0){
+      showToast("Out of stock!");
+      return;
+    }
     cart.push({
 
       id:id,
@@ -2452,6 +2953,22 @@ function showProduct(id){
 
         ${priceHTML}
 
+        ${
+          product.stock !== undefined
+
+          ? `
+            <p style="
+              font-size:12px;
+              margin-top:8px;
+              color:${product.stock <= 10 ? '#ffaa32' : '#7ee787'};
+            ">
+              ${product.stock <= 0 ? 'Out of stock' : (product.stock <= 10 ? `Only ${product.stock} left` : `In stock (${product.stock})`)}
+            </p>
+          `
+
+          : ""
+        }
+
 
         ${
           discount > 0
@@ -2481,8 +2998,9 @@ function showProduct(id){
             addToCart(${product.id});
             closeModal();
           "
+          ${product.stock !== undefined && product.stock <= 0 ? 'disabled style="opacity:0.5;cursor:not-allowed;"' : ''}
         >
-          ADD TO CART →
+          ${product.stock !== undefined && product.stock <= 0 ? 'OUT OF STOCK' : 'ADD TO CART →'}
         </button>
 
       </div>
@@ -2532,6 +3050,12 @@ function closeEverything(){
 
   closeModal();
 
+  closeCheckout();
+
+  closeAdminLogin();
+
+  closeProductForm();
+
 }
 
 
@@ -2572,24 +3096,480 @@ function showToast(message){
 
 
 /* =====================================================
-   CHECKOUT
+   ADMIN PANEL
+===================================================== */
+
+const ADMIN_PASSWORD = "admin123";
+
+function openAdminLogin(){
+  document.getElementById("adminLoginModal").classList.add("show");
+  document.getElementById("overlay").classList.add("show");
+  document.getElementById("adminPassword").value = "";
+  document.getElementById("adminLoginError").style.display = "none";
+  setTimeout(() => document.getElementById("adminPassword").focus(), 100);
+}
+function closeAdminLogin(){
+  document.getElementById("adminLoginModal").classList.remove("show");
+  document.getElementById("overlay").classList.remove("show");
+}
+function loginAdmin(){
+  const pass = document.getElementById("adminPassword").value;
+  if(pass === ADMIN_PASSWORD){
+    closeAdminLogin();
+    openAdminPanel();
+  } else {
+    document.getElementById("adminLoginError").style.display = "block";
+  }
+}
+function logoutAdmin(){
+  closeAdminPanel();
+  showToast("Logged out");
+}
+function openAdminPanel(){
+  document.getElementById("adminPanel").classList.add("open");
+  document.body.style.overflow = "hidden";
+  renderAdminProducts();
+  renderAdminOrders();
+  renderAdminMessages();
+  renderAdminStats();
+}
+function closeAdminPanel(){
+  document.getElementById("adminPanel").classList.remove("open");
+  document.getElementById("adminSearchInput").value = "";
+  document.body.style.overflow = "";
+}
+function switchAdminTab(tab,btn){
+  document.querySelectorAll(".admin-tab").forEach(t=>t.classList.remove("active"));
+  document.querySelectorAll(".admin-tab-content").forEach(t=>t.classList.remove("active"));
+  btn.classList.add("active");
+  document.getElementById("tab-"+tab).classList.add("active");
+  document.getElementById("adminSearchInput").value = "";
+  if(tab === 'products') renderAdminProducts();
+  else if(tab === 'orders') renderAdminOrders();
+  else if(tab === 'messages') renderAdminMessages();
+}
+
+function renderAdminStats(){
+  document.getElementById("statProducts").textContent = products.length;
+  document.getElementById("statOrders").textContent = loadOrders().length;
+  document.getElementById("statMessages").textContent = chatMessages.filter(m=>m.type==='user').length;
+}
+
+function updateOrderStatus(orderId, status){
+  const orders = loadOrders();
+  const order = orders.find(o => o.id === orderId);
+  if(order){
+    order.status = status;
+    saveOrders(orders);
+    renderAdminOrders();
+    showToast(`Order #${orderId} updated to ${status}`);
+  }
+}
+
+function cycleOrderStatus(orderId){
+  const orders = loadOrders();
+  const order = orders.find(o => o.id === orderId);
+  if(!order) return;
+  const statuses = ['NEW','SHIPPED','DELIVERED','CANCELLED'];
+  const current = statuses.indexOf(order.status || 'NEW');
+  const next = (current + 1) % statuses.length;
+  updateOrderStatus(orderId, statuses[next]);
+}
+
+function replyToChat(messageIndex){
+  const input = document.getElementById("replyInput_" + messageIndex);
+  if(!input) return;
+  const text = input.value.trim();
+  if(!text) return;
+  const time = new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+  chatMessages.push({text, type:'bot', time});
+  saveChat();
+  renderAdminMessages();
+  renderAdminStats();
+  showToast("Reply sent ✓");
+}
+
+function handleAdminSearch(query){
+  const term = query.toLowerCase().trim();
+  if(!term){
+    renderAdminProducts();
+    renderAdminOrders();
+    return;
+  }
+  
+  // Filter products
+  const productContainer = document.getElementById("adminProductsList");
+  const filteredProducts = products.filter(p => 
+    p.name.toLowerCase().includes(term) || 
+    p.category.toLowerCase().includes(term)
+  );
+  
+  if(filteredProducts.length === 0){
+    productContainer.innerHTML = '<div class="admin-empty">No products match your search.</div>';
+  } else {
+    productContainer.innerHTML = filteredProducts.map(p => {
+      const stockClass = p.stock <= 10 ? 'low' : 'ok';
+      const stockLabel = p.stock <= 0 ? 'Out of stock' : (p.stock <= 10 ? 'Low stock' : 'In stock');
+      return `
+      <div class="admin-product-card">
+        <img src="${p.image}" alt="${p.name}" onerror="this.style.display='none'">
+        <div class="admin-product-info">
+          <h3>${p.name}</h3>
+          <p>${p.category}</p>
+          <p>${money(p.price)} ${p.originalPrice ? '<s style="color:#777783;">'+money(p.originalPrice)+'</s>' : ''}</p>
+          <span class="admin-stock ${stockClass}">Stock: ${p.stock} (${stockLabel})</span>
+        </div>
+        <div class="admin-product-actions">
+          <button class="admin-edit" onclick="editProduct(${p.id})">EDIT</button>
+          <button class="admin-delete" onclick="deleteProduct(${p.id})">DELETE</button>
+        </div>
+      </div>
+    `;
+    }).join("");
+  }
+  
+  // Filter orders
+  const orders = loadOrders();
+  const filteredOrders = orders.filter(o => 
+    o.id.includes(term) || 
+    o.name.toLowerCase().includes(term) || 
+    o.phone.includes(term) ||
+    (o.status || 'NEW').toLowerCase().includes(term)
+  );
+  
+  const orderContainer = document.getElementById("adminOrdersList");
+  if(filteredOrders.length === 0){
+    orderContainer.innerHTML = '<div class="admin-empty">No orders match your search.</div>';
+  } else {
+    orderContainer.innerHTML = filteredOrders.slice().reverse().map(o => {
+      const statusLower = (o.status || 'NEW').toLowerCase();
+      return `
+      <div class="admin-order-card">
+        <div class="admin-order-header">
+          <div>
+            <div class="admin-order-id">#${o.id}</div>
+            <div class="admin-order-date">${o.date}</div>
+          </div>
+          <button class="admin-order-status ${statusLower}" onclick="cycleOrderStatus('${o.id}')" title="Click to change status">
+            ${o.status || 'NEW'}
+          </button>
+        </div>
+        <div class="admin-order-items">
+          ${o.items.map(item => {
+            const p = products.find(x=>x.id===item.id) || {name:'Unknown',price:0};
+            return `<div class="admin-order-item">
+              <span>${item.name} × ${item.quantity}</span>
+              <span>${money(p.price * item.quantity)}</span>
+            </div>`;
+          }).join("")}
+          <div class="admin-order-total">
+            <span>TOTAL</span>
+            <span style="color:var(--purple2);">${money(o.total)}</span>
+          </div>
+        </div>
+        <div class="admin-order-customer">
+          <strong>Customer Details</strong><br>
+          Name: ${o.name}<br>
+          Phone: ${o.phone}<br>
+          Address: ${o.address}
+        </div>
+        <div class="admin-order-actions">
+          <button onclick="updateOrderStatus('${o.id}','NEW')">New</button>
+          <button onclick="updateOrderStatus('${o.id}','SHIPPED')">Shipped</button>
+          <button onclick="updateOrderStatus('${o.id}','DELIVERED')">Delivered</button>
+          <button onclick="updateOrderStatus('${o.id}','CANCELLED')" style="color:var(--danger);border-color:var(--danger);">Cancel</button>
+        </div>
+      </div>
+    `;
+    }).join("");
+  }
+}
+
+/* =====================================================
+   ADMIN PRODUCT CRUD
+===================================================== */
+
+function renderAdminProducts(){
+  const container = document.getElementById("adminProductsList");
+  if(products.length === 0){
+    container.innerHTML = '<div class="admin-empty">No products yet. Click + ADD PRODUCT to create one.</div>';
+    renderAdminStats();
+    return;
+  }
+  container.innerHTML = products.map(p => {
+    const stockClass = p.stock <= 10 ? 'low' : 'ok';
+    const stockLabel = p.stock <= 0 ? 'Out of stock' : (p.stock <= 10 ? 'Low stock' : 'In stock');
+    return `
+    <div class="admin-product-card">
+      <img src="${p.image}" alt="${p.name}" onerror="this.style.display='none'">
+      <div class="admin-product-info">
+        <h3>${p.name}</h3>
+        <p>${p.category}</p>
+        <p>${money(p.price)} ${p.originalPrice ? '<s style="color:#777783;">'+money(p.originalPrice)+'</s>' : ''}</p>
+        <span class="admin-stock ${stockClass}">Stock: ${p.stock} (${stockLabel})</span>
+      </div>
+      <div class="admin-product-actions">
+        <button class="admin-edit" onclick="editProduct(${p.id})">EDIT</button>
+        <button class="admin-delete" onclick="deleteProduct(${p.id})">DELETE</button>
+      </div>
+    </div>
+  `;
+  }).join("");
+  renderAdminStats();
+}
+
+function openProductForm(id){
+  const modal = document.getElementById("productFormModal");
+  const title = document.getElementById("productFormTitle");
+  const btn = document.getElementById("productSaveBtn");
+  document.getElementById("overlay").classList.add("show");
+  modal.classList.add("show");
+  
+  if(id){
+    const p = products.find(x=>x.id===id);
+    title.textContent = "EDIT PRODUCT";
+    btn.textContent = "UPDATE PRODUCT";
+    document.getElementById("productId").value = p.id;
+    document.getElementById("productName").value = p.name;
+    document.getElementById("productCategory").value = p.category;
+    document.getElementById("productPrice").value = p.price;
+    document.getElementById("productOriginalPrice").value = p.originalPrice || "";
+    document.getElementById("productStock").value = p.stock !== undefined ? p.stock : 50;
+    document.getElementById("productImage").value = p.image;
+    document.getElementById("productDescription").value = p.description;
+  } else {
+    title.textContent = "ADD PRODUCT";
+    btn.textContent = "SAVE PRODUCT";
+    document.getElementById("productId").value = "";
+    document.getElementById("productName").value = "";
+    document.getElementById("productCategory").value = "Phone Cooler";
+    document.getElementById("productPrice").value = "";
+    document.getElementById("productOriginalPrice").value = "";
+    document.getElementById("productStock").value = "50";
+    document.getElementById("productImage").value = "";
+    document.getElementById("productDescription").value = "";
+  }
+}
+
+function closeProductForm(){
+  document.getElementById("productFormModal").classList.remove("show");
+  document.getElementById("overlay").classList.remove("show");
+}
+
+function saveProduct(e){
+  e.preventDefault();
+  const id = document.getElementById("productId").value;
+  const name = document.getElementById("productName").value.trim();
+  const category = document.getElementById("productCategory").value;
+  const price = parseInt(document.getElementById("productPrice").value);
+  const originalPrice = document.getElementById("productOriginalPrice").value ? parseInt(document.getElementById("productOriginalPrice").value) : null;
+  const stock = parseInt(document.getElementById("productStock").value) || 0;
+  const image = document.getElementById("productImage").value.trim();
+  const description = document.getElementById("productDescription").value.trim();
+  
+  if(id){
+    const idx = products.findIndex(p=>p.id===parseInt(id));
+    if(idx>=0){
+      products[idx] = {...products[idx], name, category, price, originalPrice, stock, image, description};
+    }
+  } else {
+    const newId = products.length > 0 ? Math.max(...products.map(p=>p.id)) + 1 : 1;
+    products.push({id:newId, name, category, price, originalPrice, stock, image, description});
+  }
+  
+  saveProducts(products);
+  renderProducts();
+  renderAdminProducts();
+  closeProductForm();
+  showToast(id ? "Product updated ✓" : "Product added ✓");
+}
+
+function editProduct(id){
+  openProductForm(id);
+}
+
+function deleteProduct(id){
+  if(!confirm("Delete this product?")) return;
+  products = products.filter(p=>p.id!==id);
+  saveProducts(products);
+  renderProducts();
+  renderAdminProducts();
+  showToast("Product deleted");
+}
+
+/* =====================================================
+   ORDERS
+===================================================== */
+
+function loadOrders(){
+  const saved = localStorage.getItem("vytrixOrders");
+  return saved ? JSON.parse(saved) : [];
+}
+
+function saveOrders(list){
+  localStorage.setItem("vytrixOrders", JSON.stringify(list));
+}
+
+function renderAdminOrders(){
+  const container = document.getElementById("adminOrdersList");
+  const orders = loadOrders();
+  if(orders.length === 0){
+    container.innerHTML = '<div class="admin-empty">No orders yet.</div>';
+    renderAdminStats();
+    return;
+  }
+  container.innerHTML = orders.slice().reverse().map(o => {
+    const statusLower = (o.status || 'NEW').toLowerCase();
+    return `
+    <div class="admin-order-card">
+      <div class="admin-order-header">
+        <div>
+          <div class="admin-order-id">#${o.id}</div>
+          <div class="admin-order-date">${o.date}</div>
+        </div>
+        <button class="admin-order-status ${statusLower}" onclick="cycleOrderStatus('${o.id}')" title="Click to change status">
+          ${o.status || 'NEW'}
+        </button>
+      </div>
+      <div class="admin-order-items">
+        ${o.items.map(item => {
+          const p = products.find(x=>x.id===item.id) || {name:'Unknown',price:0};
+          return `<div class="admin-order-item">
+            <span>${item.name} × ${item.quantity}</span>
+            <span>${money(p.price * item.quantity)}</span>
+          </div>`;
+        }).join("")}
+        <div class="admin-order-total">
+          <span>TOTAL</span>
+          <span style="color:var(--purple2);">${money(o.total)}</span>
+        </div>
+      </div>
+      <div class="admin-order-customer">
+        <strong>Customer Details</strong><br>
+        Name: ${o.name}<br>
+        Phone: ${o.phone}<br>
+        Address: ${o.address}
+      </div>
+      <div class="admin-order-actions">
+        <button onclick="updateOrderStatus('${o.id}','NEW')">New</button>
+        <button onclick="updateOrderStatus('${o.id}','SHIPPED')">Shipped</button>
+        <button onclick="updateOrderStatus('${o.id}','DELIVERED')">Delivered</button>
+        <button onclick="updateOrderStatus('${o.id}','CANCELLED')" style="color:var(--danger);border-color:var(--danger);">Cancel</button>
+      </div>
+    </div>
+  `;
+  }).join("");
+  renderAdminStats();
+}
+
+/* =====================================================
+   ADMIN MESSAGES
+===================================================== */
+
+function renderAdminMessages(){
+  const container = document.getElementById("adminMessagesList");
+  if(chatMessages.length === 0){
+    container.innerHTML = '<div class="admin-empty">No messages yet. Messages from live chat will appear here.</div>';
+    renderAdminStats();
+    return;
+  }
+  container.innerHTML = chatMessages.slice().reverse().map((m, index) => {
+    const realIndex = chatMessages.length - 1 - index;
+    return `
+    <div class="admin-message-card">
+      <div class="admin-message-header">
+        <span class="admin-message-sender">${m.type === 'user' ? 'CUSTOMER' : 'SUPPORT'}</span>
+        <span class="admin-message-time">${m.time}</span>
+      </div>
+      <div class="admin-message-text">${m.text}</div>
+      ${m.type === 'user' ? `
+        <div class="admin-reply-form">
+          <input type="text" id="replyInput_${realIndex}" placeholder="Type your reply..." onkeydown="if(event.key==='Enter')replyToChat(${realIndex})">
+          <button onclick="replyToChat(${realIndex})">SEND</button>
+        </div>
+      ` : ''}
+    </div>
+  `;
+  }).join("");
+  renderAdminStats();
+}
+
+/* =====================================================
+   CHECKOUT & ORDERS
 ===================================================== */
 
 function checkout(){
-
   if(cart.length === 0){
-
     showToast("Your cart is empty.");
-
     return;
-
   }
+  const total = cart.reduce((sum,item)=>{
+    const p = products.find(x=>x.id===item.id);
+    return sum + (p ? p.price * item.quantity : 0);
+  },0);
+  document.getElementById("checkoutTotal").textContent = money(total);
+  document.getElementById("checkoutCount").textContent = cart.reduce((s,i)=>s+i.quantity,0);
+  document.getElementById("checkoutModal").classList.add("show");
+  document.getElementById("overlay").classList.add("show");
+}
 
+function closeCheckout(){
+  document.getElementById("checkoutModal").classList.remove("show");
+  document.getElementById("overlay").classList.remove("show");
+}
 
-  alert(
-    "Checkout system can be connected here."
-  );
-
+function placeOrder(e){
+  e.preventDefault();
+  const name = document.getElementById("orderName").value.trim();
+  const phone = document.getElementById("orderPhone").value.trim();
+  const address = document.getElementById("orderAddress").value.trim();
+  
+  // Validate stock
+  for(const item of cart){
+    const product = products.find(x=>x.id===item.id);
+    if(!product || product.stock === undefined || item.quantity > product.stock){
+      showToast(`${product ? product.name : 'Item'} is out of stock!`);
+      return;
+    }
+  }
+  
+  const total = cart.reduce((sum,item)=>{
+    const p = products.find(x=>x.id===item.id);
+    return sum + (p ? p.price * item.quantity : 0);
+  },0);
+  
+  const order = {
+    id: Date.now().toString().slice(-6),
+    date: new Date().toLocaleString(),
+    items: [...cart],
+    total: total,
+    name: name,
+    phone: phone,
+    address: address,
+    status: "NEW"
+  };
+  
+  const orders = loadOrders();
+  orders.push(order);
+  saveOrders(orders);
+  
+  // Reduce stock
+  cart.forEach(item => {
+    const product = products.find(x=>x.id===item.id);
+    if(product && product.stock !== undefined){
+      product.stock = Math.max(0, product.stock - item.quantity);
+    }
+  });
+  saveProducts(products);
+  renderProducts();
+  
+  cart = [];
+  saveCart();
+  closeCheckout();
+  showToast("Order placed successfully! ✓");
+  document.getElementById("orderName").value = "";
+  document.getElementById("orderPhone").value = "";
+  document.getElementById("orderAddress").value = "";
 }
 
 
@@ -2598,10 +3578,9 @@ function checkout(){
 ===================================================== */
 
 renderProducts();
-
 renderCart();
-
 updateSlider();
+loadChat();
 
 </script>
 
