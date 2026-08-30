@@ -851,6 +851,15 @@ footer{
   transform:translate(-50%,-50%) scale(1);
 }
 
+/* PRODUCT EDIT MODAL MUST STAY ABOVE ADMIN PANEL */
+#productFormModal{
+  z-index:700;
+}
+
+body.product-editing #overlay{
+  z-index:650;
+}
+
 .modal-close{
   position:absolute;
   right:20px;
@@ -2054,7 +2063,7 @@ footer{
       <div class="admin-search">
         <input type="text" id="adminSearchInput" placeholder="Search products, orders..." oninput="handleAdminSearch(this.value)">
       </div>
-      <button class="btn primary" onclick="openProductForm()">+ ADD PRODUCT</button>
+      <button type="button" class="btn primary" onclick="openProductForm(); return false;">+ ADD PRODUCT</button>
       <button class="outline" onclick="logoutAdmin()">LOGOUT</button>
       <button class="outline" onclick="closeAdminPanel()">✕</button>
     </div>
@@ -2089,7 +2098,7 @@ footer{
   <button class="modal-close" onclick="closeProductForm()">✕</button>
   <div style="max-width:600px;margin:30px auto;">
     <h2 style="font-family:Orbitron,sans-serif;font-size:24px;margin-bottom:20px;" id="productFormTitle">ADD PRODUCT</h2>
-    <form onsubmit="saveProduct(event)">
+    <form onsubmit="return saveProduct(event)">
       <input type="hidden" id="productId">
       <div style="margin-bottom:15px;">
         <label style="display:block;font-size:12px;color:var(--muted);margin-bottom:6px;">Product Name</label>
@@ -3220,8 +3229,8 @@ function handleAdminSearch(query){
           <span class="admin-stock ${stockClass}">Stock: ${p.stock} (${stockLabel})</span>
         </div>
         <div class="admin-product-actions">
-          <button class="admin-edit" onclick="editProduct(${p.id})">EDIT</button>
-          <button class="admin-delete" onclick="deleteProduct(${p.id})">DELETE</button>
+          <button type="button" class="admin-edit" onclick="editProduct(${p.id}); return false;">EDIT</button>
+          <button type="button" class="admin-delete" onclick="deleteProduct(${p.id}); return false;">DELETE</button>
         </div>
       </div>
     `;
@@ -3309,8 +3318,8 @@ function renderAdminProducts(){
         <span class="admin-stock ${stockClass}">Stock: ${p.stock} (${stockLabel})</span>
       </div>
       <div class="admin-product-actions">
-        <button class="admin-edit" onclick="editProduct(${p.id})">EDIT</button>
-        <button class="admin-delete" onclick="deleteProduct(${p.id})">DELETE</button>
+        <button type="button" class="admin-edit" onclick="editProduct(${p.id}); return false;">EDIT</button>
+        <button type="button" class="admin-delete" onclick="deleteProduct(${p.id}); return false;">DELETE</button>
       </div>
     </div>
   `;
@@ -3322,21 +3331,32 @@ function openProductForm(id){
   const modal = document.getElementById("productFormModal");
   const title = document.getElementById("productFormTitle");
   const btn = document.getElementById("productSaveBtn");
+
+  // Keep the admin panel open while editing. The edit modal is layered above it.
+  document.body.classList.add("product-editing");
   document.getElementById("overlay").classList.add("show");
   modal.classList.add("show");
-  
-  if(id){
-    const p = products.find(x=>x.id===id);
+
+  if(id !== undefined && id !== null && id !== ""){
+    const productId = Number(id);
+    const p = products.find(x => Number(x.id) === productId);
+
+    if(!p){
+      closeProductForm();
+      showToast("Product not found");
+      return;
+    }
+
     title.textContent = "EDIT PRODUCT";
     btn.textContent = "UPDATE PRODUCT";
     document.getElementById("productId").value = p.id;
-    document.getElementById("productName").value = p.name;
-    document.getElementById("productCategory").value = p.category;
-    document.getElementById("productPrice").value = p.price;
-    document.getElementById("productOriginalPrice").value = p.originalPrice || "";
+    document.getElementById("productName").value = p.name || "";
+    document.getElementById("productCategory").value = p.category || "Phone Cooler";
+    document.getElementById("productPrice").value = p.price ?? "";
+    document.getElementById("productOriginalPrice").value = p.originalPrice ?? "";
     document.getElementById("productStock").value = p.stock !== undefined ? p.stock : 50;
-    document.getElementById("productImage").value = p.image;
-    document.getElementById("productDescription").value = p.description;
+    document.getElementById("productImage").value = p.image || "";
+    document.getElementById("productDescription").value = p.description || "";
   } else {
     title.textContent = "ADD PRODUCT";
     btn.textContent = "SAVE PRODUCT";
@@ -3354,38 +3374,80 @@ function openProductForm(id){
 function closeProductForm(){
   document.getElementById("productFormModal").classList.remove("show");
   document.getElementById("overlay").classList.remove("show");
+  document.body.classList.remove("product-editing");
 }
 
 function saveProduct(e){
-  e.preventDefault();
-  const id = document.getElementById("productId").value;
+  if(e) e.preventDefault();
+  if(e) e.stopPropagation();
+
+  const idValue = document.getElementById("productId").value.trim();
   const name = document.getElementById("productName").value.trim();
   const category = document.getElementById("productCategory").value;
-  const price = parseInt(document.getElementById("productPrice").value);
-  const originalPrice = document.getElementById("productOriginalPrice").value ? parseInt(document.getElementById("productOriginalPrice").value) : null;
-  const stock = parseInt(document.getElementById("productStock").value) || 0;
+  const price = parseInt(document.getElementById("productPrice").value, 10);
+  const originalRaw = document.getElementById("productOriginalPrice").value.trim();
+  const originalPrice = originalRaw ? parseInt(originalRaw, 10) : null;
+  const stock = parseInt(document.getElementById("productStock").value, 10) || 0;
   const image = document.getElementById("productImage").value.trim();
   const description = document.getElementById("productDescription").value.trim();
-  
-  if(id){
-    const idx = products.findIndex(p=>p.id===parseInt(id));
-    if(idx>=0){
-      products[idx] = {...products[idx], name, category, price, originalPrice, stock, image, description};
-    }
-  } else {
-    const newId = products.length > 0 ? Math.max(...products.map(p=>p.id)) + 1 : 1;
-    products.push({id:newId, name, category, price, originalPrice, stock, image, description});
+
+  if(!name || !category || !Number.isFinite(price) || price < 0 || !image || !description){
+    showToast("Please complete all product fields");
+    return false;
   }
-  
+
+  if(originalPrice !== null && (!Number.isFinite(originalPrice) || originalPrice < 0)){
+    showToast("Invalid original price");
+    return false;
+  }
+
+  if(idValue){
+    const productId = Number(idValue);
+    const idx = products.findIndex(p => Number(p.id) === productId);
+
+    if(idx === -1){
+      showToast("Product not found");
+      return false;
+    }
+
+    // Update the existing product without navigating/reloading the page.
+    products[idx] = {
+      ...products[idx],
+      name, category, price, originalPrice, stock, image, description
+    };
+  } else {
+    const newId = products.length > 0
+      ? Math.max(...products.map(p => Number(p.id) || 0)) + 1
+      : 1;
+
+    products.push({
+      id:newId, name, category, price, originalPrice, stock, image, description
+    });
+  }
+
   saveProducts(products);
+
+  // Refresh both storefront and admin list, but NEVER leave the admin panel.
   renderProducts();
   renderAdminProducts();
+  renderAdminStats();
+
   closeProductForm();
-  showToast(id ? "Product updated ✓" : "Product added ✓");
+  showToast(idValue ? "Product updated ✓" : "Product added ✓");
+  return false;
 }
 
 function editProduct(id){
-  openProductForm(id);
+  const productId = Number(id);
+  const p = products.find(x => Number(x.id) === productId);
+
+  if(!p){
+    showToast("Product not found");
+    return false;
+  }
+
+  openProductForm(productId);
+  return false;
 }
 
 function deleteProduct(id){
